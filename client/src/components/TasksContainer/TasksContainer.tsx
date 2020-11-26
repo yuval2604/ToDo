@@ -12,6 +12,7 @@ const TasksContainer = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log("TasksContainer")
     const getTasks = async () => {
       const res = await getAllTasks();
 

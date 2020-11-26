@@ -1,9 +1,14 @@
 import { Task } from "../interfaces/interfaces";
 
 const isProduction = process.env.NODE_ENV === "production";
-const url = `${isProduction ? process.env.REACT_APP_BASE_URL_PRODUCTION : process.env.REACT_APP_BASE_URL}/api/tasks`;
+const url = `${
+  isProduction
+    ? process.env.REACT_APP_BASE_URL_PRODUCTION
+    : process.env.REACT_APP_BASE_URL
+}/api/tasks`;
 
 const getAllTasks = async () => {
+  console.log(url, process.env.REACT_APP_BASE_URL_PRODUCTION, process.env.REACT_APP_BASE_URL, process.env  )
   const res = await fetch(url);
   return responseHandler(res);
 };
@@ -30,7 +35,7 @@ const setRestOptions = (methodType: string, body?: any) => {
   return {
     method: methodType,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   };
 };
 
@@ -43,7 +48,7 @@ const responseHandler = async (serverRes: Response) => {
     if (data) {
       res = { success: true, data };
     }
-  } catch (err) { }
+  } catch (err) {}
 
   return res;
 };

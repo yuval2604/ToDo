@@ -11,14 +11,16 @@ const port = process.env.PORT || 8080;
 const logger = pino({ level: process.env.LOG_LEVEL || "info" });
 const expressLogger = expressPino({ logger });
 
-mongoose.connect(`${process.env.DB_CONNECTION_STRING}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-}).then(() => {
-  logger.info("MongoDB Connected!");
-  app.listen(port, () => logger.info(`Listening on port: ${port}`));
-});
+mongoose
+  .connect(`${process.env.DB_CONNECTION_STRING}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    logger.info("MongoDB Connected!");
+    app.listen(port, () => logger.info(`Listening on port: ${port}`));
+  });
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
